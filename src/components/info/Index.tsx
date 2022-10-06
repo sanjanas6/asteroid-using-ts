@@ -5,6 +5,7 @@ import "./index.css";
 const Index = () => {
   const [ipt, setInput] = useState<number | string>(0);
   const [id, setID] = useState<number | string>(0);
+  const [but, setBut] = useState<any>(true);
   const [data, setData] = useState<any>([]);
   const navigate = useNavigate();
   
@@ -26,12 +27,13 @@ const Index = () => {
      console.log(data);
      navigate('/info', {state:data});
      }catch(e){
-      console.log("NOT MATCHED...!");
+      alert("NOT MATCHED...!");
      }
    };
    
    const InputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value)
+    setBut(false);
     console.log(e.target.value)
   };
 
@@ -45,6 +47,7 @@ const Index = () => {
    
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     getData(ipt);
+    setBut(true);
   };
 
   return (
@@ -56,9 +59,9 @@ const Index = () => {
       />
      
         <button
+          disabled={but}
           style={{marginTop:"10px" , backgroundColor:"white"}}
           onClick={handleSubmit}
-          
         >
           Submit
         </button>

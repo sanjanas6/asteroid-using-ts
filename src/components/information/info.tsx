@@ -13,7 +13,7 @@ const Information = () => {
   console.log(data);
 
   return (
-    <div className="information">
+    <div className="information" data-testid="divmain">
       <h2 style={{textAlign: "center" , color:"Blue"}}>Asteroid id: {data.id}</h2>
       <h3 style={{textAlign: "center" , color:"Blue"}}>Asteroid name: {data.name}</h3>
     </div>

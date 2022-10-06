@@ -6,33 +6,43 @@ const Index = () => {
   const [ipt, setInput] = useState<number | string>(0);
   const [id, setID] = useState<number | string>(0);
   const [but, setBut] = useState<any>(true);
+  const [load, setLoad] = useState(false);
   const [data, setData] = useState<any>([]);
   const navigate = useNavigate();
   
   useEffect(() => {
+    setLoad(true);
     const fetchData = async () =>{
       const res = await fetch(`https://api.nasa.gov/neo/rest/v1/neo/browse?api_key=L6AW6ZMaTbURc0Kjh0eEPcbJDQmaqlWDjqVSAiHW`)
       const data = await res.json();
       console.log(data);
       setData([data]);
+      setLoad(false);
     };
     fetchData();
   }, []);
 
   
   const getData = async (id : number | string) => {
+    setLoad(true);
     try{
      const res = await fetch(`https://api.nasa.gov/neo/rest/v1/neo/${id}?api_key=L6AW6ZMaTbURc0Kjh0eEPcbJDQmaqlWDjqVSAiHW`)
+     if(!res.ok){
+      alert('Not Found...!')
+     }
      const data = await res.json();
      console.log(data);
      navigate('/info', {state:data});
+     setLoad(false);
      }catch(e){
       alert("NOT MATCHED...!");
+      setLoad(false);
      }
    };
    
    const InputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value)
+    // if(ipt.length === 0)
     setBut(false);
     console.log(e.target.value)
   };
@@ -57,7 +67,7 @@ const Index = () => {
         placeholder="Enter Asteroid ID"
         onChange={InputHandler}
       />
-     
+     {load && <h1>Loading...</h1>}
         <button
           disabled={but}
           style={{marginTop:"10px" , backgroundColor:"white"}}

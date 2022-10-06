@@ -11,8 +11,8 @@ const Index = () => {
   const navigate = useNavigate();
   
   useEffect(() => {
-    setLoad(true);
     const fetchData = async () =>{
+      setLoad(true);
       const res = await fetch(`https://api.nasa.gov/neo/rest/v1/neo/browse?api_key=L6AW6ZMaTbURc0Kjh0eEPcbJDQmaqlWDjqVSAiHW`)
       const data = await res.json();
       console.log(data);
@@ -24,9 +24,9 @@ const Index = () => {
 
   
   const getData = async (id : number | string) => {
-    setLoad(true);
     try{
-     const res = await fetch(`https://api.nasa.gov/neo/rest/v1/neo/${id}?api_key=L6AW6ZMaTbURc0Kjh0eEPcbJDQmaqlWDjqVSAiHW`)
+      setLoad(true);
+      const res = await fetch(`https://api.nasa.gov/neo/rest/v1/neo/${id}?api_key=L6AW6ZMaTbURc0Kjh0eEPcbJDQmaqlWDjqVSAiHW`)
      if(!res.ok){
       alert('Not Found...!')
      }

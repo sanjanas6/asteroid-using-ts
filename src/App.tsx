@@ -1,12 +1,19 @@
-import "./App.css";
-import Router from "./components/routers/Router";
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import Index from "./components/info/Index";
+import Information from "./components/information/info";
+import PageNotFound from "./components/PageNotFound";
 
-function App() {
+const App = () => {
   return (
-    <div className="container center">
-      <Router />
+    <div>
+      <Routes>
+        <Route path="/" element={<Index />} />
+        <Route path="/info" element={<Information />} />
+        <Route path="*" element={<PageNotFound />}  />
+      </Routes>
     </div>
   );
-}
+};
 
 export default App;
